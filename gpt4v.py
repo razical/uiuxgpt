@@ -52,12 +52,10 @@ def check_website_url(text):
         return True
 
 
-placeholder = st.empty()
-
 website_input = st.text_input("Website/Page URL", key="website")
 if st.button("Submit", type="primary"):
-    st.empty()
     if website_input:
+        placeholder = st.empty()
         if check_website_url(website_input):
             # change it later to website_input
             if not website_input.startswith('http'):
@@ -67,7 +65,7 @@ if st.button("Submit", type="primary"):
 
             placeholder.text("loading the site...")
             time.sleep(4)  # load the screenshot
-            placeholder.text("Finding Improvement Ideas for ", website_input)
+            placeholder.text("Finding Improvement Ideas for " + website_input)
             content = gpt4v(url)
             placeholder.empty()
             st.subheader("Improvement Ideas for " + website_input +
