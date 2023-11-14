@@ -1,7 +1,10 @@
-from openai import OpenAI
+import openai
 import streamlit as st
 import time
-client = OpenAI()
+import os
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+client = openai.OpenAI()
 
 st.set_page_config(
     page_title="Actionable Ideas for Better Conversion Rate",
