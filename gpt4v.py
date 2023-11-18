@@ -4,24 +4,22 @@ import time
 import os
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+PROMPT = os.getenv("PROMPT")
 client = openai.OpenAI()
+
+PROMPT = "Can you give actionable ideas related to the elements in the design to increase conversion & Reduce Bounce Rate. Give around 7 ideas."
+
 
 st.set_page_config(
     page_title="Actionable Ideas for Better Conversion Rate",
     page_icon=":robot:"
 )
 
-st.title("UI/UX Conversion Advisor")
+st.title("AI UI/UX Conversion Advisor")
 st.markdown('''
-## Actionable Ideas for your Hero Section to Improve Conversion
- Input a website & I shall give you ACTIONABLE IDEAS based on THE CURRENT DESIGN for better UX & Conversion.
+## Actionable Ideas for your Hero Section to Improve Conversion & Reduce Bounce Rate.
+Please do Try again, if you don't get results at once.
 ''')
-
-# Possible Prompts
-# How would you rate this design? Can you tell what is good and bad in the design from a UI & UX Expert's perspective
-# Can you tell me all the bad things about this design?
-
-url = "https://screenshotone.com/images/stripe.webp"
 
 
 def gpt4v(screenshot_url):
@@ -31,7 +29,7 @@ def gpt4v(screenshot_url):
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "Can you give actionable ideas related to the elements in the design to increase conversion."},
+                    {"type": "text", "text": PROMPT},
                     {
                         "type": "image_url",
                         "image_url": {
@@ -72,7 +70,7 @@ if st.button("Submit", type="primary"):
             content = gpt4v(url)
             placeholder.empty()
             st.subheader("Improvement Ideas for " + website_input +
-                         " :sunglasses:", divider='rainbow')
+                         " ...", divider='rainbow')
             st.image(url)
             st.write(content)
         else:
